@@ -98,14 +98,14 @@ const Search = () => {
 
   return  (
     <>
-      <div className="flex items-center" onClick={() => setOpen(true)}>
+      <div className="flex items-center cursor-pointer" onClick={() => setOpen(true)}>
         <ScanSearch className="mr-2 h-12 w-12"  color="#ea580c"/>
       </div>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value) } />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
+          <CommandGroup heading={searchValue.length > 0 ? 'Sugestions' : ''}>
             { 
               filter.map((item) => 
                 <CommandItem key={item.name} className="flex justify-between">
