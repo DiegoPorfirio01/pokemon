@@ -98,14 +98,8 @@ const Search = () => {
 
   return  (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={() => setOpen(true)}>
         <ScanSearch className="mr-2 h-12 w-12"  color="#ea580c"/>
-          <p className="text-sm text-muted-foreground">
-          Press{" "}
-          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-            <span className="text-xs">Control</span>/
-          </kbd>
-          </p>
       </div>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value) } />
