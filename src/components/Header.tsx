@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <>
       <div className="flex items-center shadow-md h-24">
-          <div className="container">
+          <div className="m-2 w-full">
             <img src={Logo} alt="" width={200}/>
           </div>
           <Search />
