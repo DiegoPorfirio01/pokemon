@@ -1,16 +1,18 @@
 import { BrowserRouter, Routes, Route  } from "react-router-dom"
-import Header from "./components/Header"
+import Pokemons from "./components/Pokemons"
+import  Layout  from "./components/Layout"
 
 const RoutesApp = () => {
   return (
     <>
       <BrowserRouter>
-        <Header />
+      <Layout>
         <Routes>
-          <Route path='/' element={'helo'} />
-          <Route path='/pokemon/:name' element={'helo'} />
-          <Route path='/pokemon/type/:type' element={'helo'} />
+            <Route path='/' element={<Pokemons />} />
+            <Route path='/pokemon/:name' element={'helo'} />
+            <Route path='/pokemon/type/:type' element={'helo'} />
         </Routes>
+      </Layout>
       </BrowserRouter>
     </>
   )
