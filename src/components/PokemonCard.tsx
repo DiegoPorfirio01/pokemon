@@ -39,7 +39,7 @@ const PokemonCard = ({name}) => {
 
   return (
     <> 
-      <Card className={`bg-${pokemon.types[0].type.name} rounded-3xl transform transition duration-500 hover:scale-110 group`}>
+      <Card className={`bg-${pokemon.types[0].type.name} rounded-3xl transform transition duration-500 hover:scale-110 group cursor-pointer`}>
          <CardHeader>
             <CardTitle className="flex justify-between items-center">
               <h1 className="text-white font-mono capitalize">{pokemon.name}</h1>
