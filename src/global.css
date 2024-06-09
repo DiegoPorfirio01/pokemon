@@ -24,6 +24,25 @@
       --input: 20 5.9% 90%;
       --ring: 24.6 95% 53.1%;
       --radius: 0.5rem;
+
+      --normal: #A8A77A;   /* Normal */
+      --fire: #EE8130;     /* Fire */
+      --water: #6390F0;    /* Water */
+      --electric: #F7D02C; /* Electric */
+      --grass: #7AC74C;    /* Grass */
+      --ice: #96D9D6;      /* Ice */
+      --fighting: #C22E28; /* Fighting */
+      --poison: #A33EA1;   /* Poison */
+      --ground: #E2BF65;   /* Ground */
+      --flying: #A98FF3;   /* Flying */
+      --psychic: #F95587;  /* Psychic */
+      --bug: #A6B91A;      /* Bug */
+      --rock: #B6A136;     /* Rock */
+      --ghost: #735797;    /* Ghost */
+      --dragon: #6F35FC;   /* Dragon */
+      --dark: #705746;     /* Dark */
+      --steel: #B7B7CE;    /* Steel */
+      --fairy: #D685AD;    /* Fairy */
     }
    
     .dark {
@@ -107,5 +126,117 @@
     }
     body {
       @apply bg-background text-foreground;
+    }
+  }
+
+  @layer utilities {
+    .bg-normal {
+      background-color: var(--normal);
+    }
+    .bg-fire {
+      background-color: var(--fire);
+    }
+    .bg-water {
+      background-color: var(--water);
+    }
+    .bg-electric {
+      background-color: var(--electric);
+    }
+    .bg-grass {
+      background-color: var(--grass);
+    }
+    .bg-ice {
+      background-color: var(--ice);
+    }
+    .bg-fighting {
+      background-color: var(--fighting);
+    }
+    .bg-poison {
+      background-color: var(--poison);
+    }
+    .bg-ground {
+      background-color: var(--ground);
+    }
+    .bg-flying {
+      background-color: var(--flying);
+    }
+    .bg-psychic {
+      background-color: var(--psychic);
+    }
+    .bg-bug {
+      background-color: var(--bug);
+    }
+    .bg-rock {
+      background-color: var(--rock);
+    }
+    .bg-ghost {
+      background-color: var(--ghost);
+    }
+    .bg-dragon {
+      background-color: var(--dragon);
+    }
+    .bg-dark {
+      background-color: var(--dark);
+    }
+    .bg-steel {
+      background-color: var(--steel);
+    }
+    .bg-fairy {
+      background-color: var(--fairy);
+    }
+  
+    .text-normal {
+      color: var(--normal);
+    }
+    .text-fire {
+      color: var(--fire);
+    }
+    .text-water {
+      color: var(--water);
+    }
+    .text-electric {
+      color: var(--electric);
+    }
+    .text-grass {
+      color: var(--grass);
+    }
+    .text-ice {
+      color: var(--ice);
+    }
+    .text-fighting {
+      color: var(--fighting);
+    }
+    .text-poison {
+      color: var(--poison);
+    }
+    .text-ground {
+      color: var(--ground);
+    }
+    .text-flying {
+      color: var(--flying);
+    }
+    .text-psychic {
+      color: var(--psychic);
+    }
+    .text-bug {
+      color: var(--bug);
+    }
+    .text-rock {
+      color: var(--rock);
+    }
+    .text-ghost {
+      color: var(--ghost);
+    }
+    .text-dragon {
+      color: var(--dragon);
+    }
+    .text-dark {
+      color: var(--dark);
+    }
+    .text-steel {
+      color: var(--steel);
+    }
+    .text-fairy {
+      color: var(--fairy);
     }
   }

@@ -74,4 +74,15 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    'bg-normal', 'bg-fire', 'bg-water', 'bg-electric', 'bg-grass', 
+    'bg-ice', 'bg-fighting', 'bg-poison', 'bg-ground', 'bg-flying', 
+    'bg-psychic', 'bg-bug', 'bg-rock', 'bg-ghost', 'bg-dragon', 
+    'bg-dark', 'bg-steel', 'bg-fairy',
+    'text-normal', 'text-fire', 'text-water', 'text-electric', 
+    'text-grass', 'text-ice', 'text-fighting', 'text-poison', 
+    'text-ground', 'text-flying', 'text-psychic', 'text-bug', 
+    'text-rock', 'text-ghost', 'text-dragon', 'text-dark', 
+    'text-steel', 'text-fairy',
+  ],
 }
