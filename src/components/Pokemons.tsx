@@ -1,8 +1,7 @@
 import { setPokemons } from "@/reducers/pokemonsSlice";
 import api from "@/services/api"
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector  } from "react-redux";
 import { SkeletonCard } from "./SkeletonCard";
 import PokemonCard from "./PokemonCard";
 
@@ -38,8 +37,8 @@ const Pokemons = () => {
 
   return (
     <>
-      <div className="mb-20 flex items-center justify-center">
-        <h1 className="font-medium text-4xl font-mono">Pokedex</h1>
+      <div className="my-20 flex items-center justify-center">
+        <h1 className="font-extrabold text-5xl">Pokedex</h1>
       </div>
       <div className="flex items-center">     
         <div className="grid sm:grid-cols-4 w-full gap-7 mx-4">
