@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import Pokemons from "./components/Pokemons"
-import  Layout  from "./components/Layout"
+import Layout  from "./components/Layout"
+import PokemonInfo from "./components/pokemonInfos"
 
 const RoutesApp = () => {
   return (
@@ -8,9 +9,9 @@ const RoutesApp = () => {
       <BrowserRouter>
       <Layout>
         <Routes>
-            <Route path='/' element={<Pokemons />} />
-            <Route path='/pokemon/:name' element={'helo'} />
-            <Route path='/pokemon/type/:type' element={'helo'} />
+          <Route path='/' element={<Pokemons />} />
+          <Route path='/pokemons/:name' element={<PokemonInfo />} />
+          <Route path='/pokemons/type/:type' element={'helo'} />
         </Routes>
       </Layout>
       </BrowserRouter>
