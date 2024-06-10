@@ -9,25 +9,29 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
+import { Link } from "react-router-dom"
 
 const PokemonCard = ({name}) => {
-  const [pokemon, setPokemon] = useState([])
+  const [pokemon, setPokemon ] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   const loadPokemon = async () => {
     try {
       const { data } = await api.get(`/pokemon/${name}`)
+      
       setPokemon(data);
-      console.log(data.types[0].type.name)
+
       setIsLoading(false)
     } catch (error) {
       console.error(error)
     }
   }
+
   
   useEffect(() => {
     loadPokemon()
   }, [])
+
 
   if(isLoading) {
     return (
@@ -39,33 +43,37 @@ const PokemonCard = ({name}) => {
 
   return (
     <> 
-      <Card className={`bg-${pokemon.types[0].type.name} rounded-3xl transform transition duration-500 hover:scale-110 group cursor-pointer`}>
-         <CardHeader>
-            <CardTitle className="flex justify-between items-center">
-              <h1 className="text-white font-mono capitalize">{pokemon.name}</h1>
+      <Link to={`/pokemons/${name}`}>
+        <Card 
+          className={`bg-${pokemon.types[0].type.name} rounded-3xl transform transition duration-500 hover:scale-110 group cursor-pointer`}
+        >
+          <CardHeader>
+            <CardTitle className="flex justify-between items-center text-white font-mono capitalize">
+              {pokemon.name}
+              <div className="flex gap-2">
+              {
+                pokemon.types.map((item, index) => 
+                  <div className={`drop-shadow-md p-2 rounded-xl bg-${item.type.name}`} key={index}>
+                    <h3 className="text-white text-xs">
+                        {item.type.name}
+                    </h3>
+                  </div>
+                )
+              }
+              </div>
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex justify-between">
-            <div className="flex flex-col gap-2 items-center">
-                {
-                  pokemon.types.map((item) => 
-                    <div className={`drop-shadow-md p-2 rounded-xl bg-${item.type.name}`}>
-                      <h3 className="text-white">
-                          {item.type.name}
-                      </h3>
-                    </div>
-                  )
-                }
-            </div>
+          <CardContent className="flex justify-center">
             <img
-              width={150}
-              height={150}
+              width={180}
+              height={180}
               className="transform transition duration-500 group-hover:scale-150"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+              src={pokemon.sprites.other['official-artwork'].front_default}
               alt="" 
             />
           </CardContent>
         </Card>
+      </Link>
     </>
   )
 }
