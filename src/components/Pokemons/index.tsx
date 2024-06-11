@@ -2,10 +2,8 @@ import { setPagination, setPokemons } from "@/reducers/pokemonsSlice";
 import api from "@/services/api"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector  } from "react-redux";
-import { SkeletonCard } from "./SkeletonCard";
 import PokemonCard from "./PokemonCard";
 import InfinityScroll from "../InfinityScroll";
-import { LoadingSpinner } from "../ui/spinner";
 
 const Pokemons = () => {
   const [ isLoading, setIsLoading ] = useState(true);
