@@ -22,7 +22,6 @@ const PokemonInfo = () => {
     try {
       const { data } = await api.get(`pokemon/${name}`)
       dispatch(setPokemon(data)) 
-      console.log(data);
       setIsLoading(false)
     } catch (error) {
       console.error(error)      
@@ -36,7 +35,7 @@ const PokemonInfo = () => {
   return (
     <>
     <Link to="/">
-      <ArrowLeft width={50} height={30} className="rounded-full text-[#FFCB05] bg-[#2d71b8] cursor-pointer" />
+      <ArrowLeft width={50} height={30} className="rounded-primary text-[#FFCB05] bg-[#2d71b8] cursor-pointer" />
     </Link>
     { isLoading ?
      (

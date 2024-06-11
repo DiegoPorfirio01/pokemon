@@ -1,7 +1,6 @@
 
 
 const StatsList = ({stats}) => {
-  console.log(stats)
   return (
     <>
      <div className="font-mono flex flex-col m-7">
@@ -11,8 +10,8 @@ const StatsList = ({stats}) => {
           </h1>
         </div>
           {
-            stats.map(({base_stat, stat: {name}}) => 
-              <div className="flex flex-col">
+            stats.map(({base_stat, stat: {name}}, index) => 
+              <div className="flex flex-col" key={index}>
                 <div className="flex justify-between">
                   <h3 className="font-semibold">
                     {name.replaceAll('-', ' ')}

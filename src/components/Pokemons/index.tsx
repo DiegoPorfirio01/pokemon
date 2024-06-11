@@ -1,9 +1,11 @@
-import { setPokemons } from "@/reducers/pokemonsSlice";
+import { setPagination, setPokemons } from "@/reducers/pokemonsSlice";
 import api from "@/services/api"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector  } from "react-redux";
 import { SkeletonCard } from "./SkeletonCard";
 import PokemonCard from "./PokemonCard";
+import InfinityScroll from "../InfinityScroll";
+import { LoadingSpinner } from "../ui/spinner";
 
 const Pokemons = () => {
   const [ isLoading, setIsLoading ] = useState(false);
@@ -11,22 +13,40 @@ const Pokemons = () => {
   const dispatch = useDispatch();
 
   const pokemons = useSelector((state) => state.pokemons.pokemons)
+  const pagination = useSelector((state) => state.pokemons.pagination)
 
   const loadPokemons = async () => {
     setIsLoading(true);
 
     try {
-      const { data } = await api.get('/pokemon?limit=24');
+      const { data: {results, next} } = await api.get(`/pokemon?limit=24`);
 
-      if(Array.isArray(data.results)) {
-        data.results.sort((a ,b) => a.name.localeCompare(b.name))
+      if(Array.isArray(results)) {
+        results.sort((a ,b) => a.name.localeCompare(b.name))
       }
 
-      dispatch(setPokemons(data.results))  
+      dispatch(setPokemons(results))  
+      dispatch(setPagination(next))
 
       setIsLoading(false)
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const loadMorePokemons = async () => {
+    try {
+      const { data: {results, next} } = await api.get(pagination);
+
+      if(Array.isArray(results)) {
+        results.sort((a ,b) => a.name.localeCompare(b.name))
+      }
+  
+      dispatch(setPokemons([...pokemons, ...results]))
+      dispatch(setPagination(next))
+
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -38,17 +58,17 @@ const Pokemons = () => {
   return (
     <>
       <div className="my-20 flex items-center justify-center">
-        <h1 className="font-extrabold text-5xl">Pokedex</h1>
+        <h1 className="font-extrabold text-5xl text-primary">Pokedex</h1>
       </div>
-      <div className="flex items-center">     
+      <div className="flex flex-col items-center justify-center">     
         <div className="grid sm:grid-cols-4 w-full gap-7 mx-4">
-          { isLoading ? (
-              Array(4).fill(0).map((_, index) => <SkeletonCard key={index}/>)
-            ) : (
-              pokemons.map((item, index) => <PokemonCard name={item.name} key={index} />)
-            )
+          {
+            pokemons.map((item, index) => <PokemonCard name={item.name} key={index} />)
           } 
         </div>
+        {  
+          !isLoading &&  <InfinityScroll  text={'Load More...'} action={loadMorePokemons} />
+        }
       </div>
     </>
   )

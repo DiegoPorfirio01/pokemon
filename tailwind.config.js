@@ -86,6 +86,6 @@ module.exports = {
     'text-grass', 'text-ice', 'text-fighting', 'text-poison', 
     'text-ground', 'text-flying', 'text-psychic', 'text-bug', 
     'text-rock', 'text-ghost', 'text-dragon', 'text-dark', 
-    'text-steel', 'text-fairy',
+    'text-steel', 'text-fairy','rounded-primary'
   ],
 }

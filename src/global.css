@@ -130,6 +130,9 @@
   }
 
   @layer utilities {
+    .rounded-primary {
+      border-radius: 3rem 1rem 3rem 1rem;
+    }
     .bg-normal {
       background-color: var(--normal);
     }

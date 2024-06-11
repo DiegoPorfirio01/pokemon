@@ -1,15 +1,14 @@
-
 import { createSlice } from '@reduxjs/toolkit'
 
 interface InitialState {
-  types: string[],
+  type: string[],
   typePokemons: string[],
   filterType: string[],
   pagination: number
 }
 
 const initialState: InitialState = {
-  types: [],
+  type: [],
   typePokemons: [],
   filterType: [],
   pagination: 12
@@ -20,7 +19,7 @@ export const typesSlice = createSlice({
   initialState,
   reducers: {
     setType: (state, action) => {
-      state.types = action.payload;
+      state.type = action.payload;
     },
     setFilterType: (state, action) => {
       state.filterType = action.payload
@@ -28,11 +27,15 @@ export const typesSlice = createSlice({
     setTypePokemons: (state, action) => {
       state.typePokemons = action.payload;
     },
-    setPagination: (state, action) => {
-      state.pagination = action.payload
+    resetPagination: (state) => {
+      state.pagination = 12;
+    }, 
+    setPagination: (state) => {
+      state.pagination += 12; 
     }, 
   }
 })
 
-export const { setType, setTypePokemons, setFilterType, setPagination } = typesSlice.actions
+
+export const { setType, setTypePokemons, setFilterType, setPagination, resetPagination} = typesSlice.actions
 export const typesReducer = typesSlice.reducer;

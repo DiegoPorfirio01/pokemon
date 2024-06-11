@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
 
 const CardInfo = ({pokemon}) => {
-  console.log(pokemon)
   return (
     <> 
       <Card 

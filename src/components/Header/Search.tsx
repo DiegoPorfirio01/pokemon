@@ -72,7 +72,7 @@ const Search = () => {
       const { data } = await api.get('/type');
 
       if (Array.isArray(data.results)) {
-          data.results.sort((a, b) => a.name.localeCompare(b.name));
+        data.results.sort((a, b) => a.name.localeCompare(b.name));
       }
 
       dispatch(setFilterType(data.results))
