@@ -47,7 +47,7 @@ const Pokemons = () => {
             ) : (
               pokemons.map((item, index) => <PokemonCard name={item.name} key={index} />)
             )
-          }
+          } 
         </div>
       </div>
     </>

@@ -13,8 +13,9 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command"
-import { setFilterTypes } from "@/reducers/typesSlice";
-import { Input } from "./ui/input";
+
+import { setFilterType } from "@/reducers/typesSlice";
+import { Input } from "../ui/input";
 
 const Search = () => {
   const [open, setOpen] = useState(false)
@@ -35,7 +36,7 @@ const Search = () => {
   const navigate = useNavigate();
 
   const filterPokemons = useSelector((state) => state.pokemons.filterPokemons);
-  const filterTypes = useSelector((state) => state.types.filterTypes);
+  const filterType = useSelector((state) => state.types.filterType);
 
   const [searchValue, setSearchValue ] = useState('');
   const [filter, setFilter] = useState([]);
@@ -47,7 +48,7 @@ const Search = () => {
 
   useEffect(() => {
     loadFilterPokemons();
-    loadFilterTypes();
+    loadFilterType();
   }, []);
 
   const loadFilterPokemons = async () => {
@@ -66,7 +67,7 @@ const Search = () => {
     }
   }
 
-  const loadFilterTypes = async () => {
+  const loadFilterType = async () => {
     try {
       const { data } = await api.get('/type');
 
@@ -74,7 +75,7 @@ const Search = () => {
           data.results.sort((a, b) => a.name.localeCompare(b.name));
       }
 
-      dispatch(setFilterTypes(data.results))
+      dispatch(setFilterType(data.results))
 
       return;
     } catch (error) {
@@ -91,9 +92,16 @@ const Search = () => {
     setSearchValue(value)
 
     const filteredPokemons = filterPokemons.filter((pokemon) => pokemon.name.startsWith(value));
-    const filteredTypes = filterTypes.filter((type) => type.name.startsWith(value));
+    const filteredTypes = filterType.filter((type) => type.name.startsWith(value));
 
     setFilter([...filteredTypes, ...filteredPokemons]);
+  }
+
+  const onSearch = (item) => {
+    item.url.includes('pokemon') ?
+      navigate(`/pokemons/${item.name}`) : navigate(`/pokemons/type/${item.name}`) 
+    
+    setOpen(false)
   }
 
   return  (
@@ -108,13 +116,16 @@ const Search = () => {
           <CommandGroup heading={searchValue.length > 0 ? 'Sugestions' : ''}>
             { 
               filter.map((item) => 
-                <CommandItem key={item.name} className="flex justify-between">
-                  <span>{item.name.replaceAll('-', ' ')}</span>
-                  <span className={item.url.includes('pokemon') ? 
-                  'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-primary' : 
-                  'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-slate-500' }>
-                    {item.url.includes('pokemon') ? 'Pokemon' : 'Type'}
-                  </span>
+                <CommandItem key={item.name}>
+                  <div className="flex justify-between w-full" onClick={() => onSearch(item)}>
+                    <span>{item.name.replaceAll('-', ' ')}</span>
+                    <span className={item.url.includes('pokemon') ? 
+                      'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-primary' : 
+                      'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-slate-500' }
+                    >
+                      {item.url.includes('pokemon') ? 'Pokemon' : 'Type'}
+                    </span>
+                  </div>
                 </CommandItem>
               )
             }
