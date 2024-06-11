@@ -8,7 +8,7 @@ import InfinityScroll from "../InfinityScroll";
 import { LoadingSpinner } from "../ui/spinner";
 
 const Pokemons = () => {
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -16,8 +16,6 @@ const Pokemons = () => {
   const pagination = useSelector((state) => state.pokemons.pagination)
 
   const loadPokemons = async () => {
-    setIsLoading(true);
-
     try {
       const { data: {results, next} } = await api.get(`/pokemon?limit=24`);
 
@@ -67,7 +65,7 @@ const Pokemons = () => {
           } 
         </div>
         {  
-          !isLoading &&  <InfinityScroll  text={'Load More...'} action={loadMorePokemons} />
+          ! isLoading &&  <InfinityScroll  text={'Load More...'} action={loadMorePokemons} />
         }
       </div>
     </>
