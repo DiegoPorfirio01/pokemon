@@ -9,7 +9,7 @@ const CardInfo = ({pokemon}) => {
       >
         <CardHeader>
           <CardTitle className="flex justify-between items-center text-white font-mono capitalize">
-            {pokemon.name}
+            {pokemon.name.replaceAll('-', ' ')}
             <div className="flex gap-2">
             {
               pokemon.types.map((item, index) => 
