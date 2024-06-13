@@ -22,7 +22,7 @@
 
 ## Instalação 🚀
 
-1. Clone o repositório do GitHub: [Link do Repositório]
+1. Clone o repositório do GitHub: [https://github.com/DiegoPorfirio01/pokemon.git](https://github.com/DiegoPorfirio01/pokemon.git)
 2. Acesse a pasta do projeto.
 3. Instale as dependências: `npm install`
 4. Inicie o servidor de desenvolvimento: `npm run dev`
@@ -56,7 +56,7 @@ Este projeto está licenciado sob a licença MIT.
 
 ## Links Úteis 🔗
 
-- Repositório GitHub: [Link do Repositório]
+- Repositório GitHub: [https://github.com/DiegoPorfirio01/pokemon.git](https://github.com/DiegoPorfirio01/pokemon.git)
 - API Pokémon: [https://pokeapi.co/](https://pokeapi.co/)
 - Axios: [https://github.com/axios/axios](https://github.com/axios/axios)
 - Tailwind CSS: [https://tailwindcss.com/](https://tailwindcss.com/)
