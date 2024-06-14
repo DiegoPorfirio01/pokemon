@@ -88,8 +88,7 @@ const Search = () => {
     <>
       <div>
         <div className="flex items-center cursor-pointer">
-          <ScanSearch className="mr-2 h-12 w-12"  color="#ea580c"/>
-          <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value) } />
+            <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value.toLocaleLowerCase()) } />
         </div>
         {
           open && (
