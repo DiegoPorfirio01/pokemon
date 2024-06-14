@@ -48,13 +48,13 @@ const PokemonCard = ({name}) => {
           className={`bg-${pokemon.types[0].type.name} rounded-3xl transform transition duration-500 hover:scale-110 group cursor-pointer`}
         >
           <CardHeader>
-            <CardTitle className="flex justify-between items-center text-white font-mono capitalize">
+            <CardTitle className="flex justify-between items-center text-white font-mono capitalize sm:text-[15px] lg:text-[27px]">
               {pokemon.name.replaceAll('-', ' ')}
               <div className="flex gap-2">
               {
                 pokemon.types.map((item, index) => 
                   <div className={`drop-shadow-md p-2 rounded-xl bg-${item.type.name}`} key={index}>
-                    <h3 className="text-white text-xs">
+                    <h3 className="text-white text-xs  sm:text-[10px] lg:text-[18px]">
                         {item.type.name}
                     </h3>
                   </div>

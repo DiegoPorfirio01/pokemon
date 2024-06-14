@@ -57,7 +57,7 @@ const Pokemons = () => {
         <h1 className="font-extrabold text-5xl text-primary">Pokedex</h1>
       </div>
       <div className="flex flex-col items-center justify-center">     
-        <div className="grid sm:grid-cols-4 w-full gap-7 mx-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-4 xl:grid-cols-2 w-full gap-7 mx-4">
           {
             pokemons.map((item, index) => <PokemonCard name={item.name} key={index} />)
           } 

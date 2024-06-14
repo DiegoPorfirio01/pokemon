@@ -82,13 +82,16 @@ const Search = () => {
   const onSearch = (item) => {
     item.url.includes('pokemon') ?
       navigate(`/pokemons/${item.name}`) : navigate(`/pokemons/type/${item.name}`) 
+    
+      setOpen(false);
   }
 
   return  (
     <>
       <div>
-        <div className="flex items-center cursor-pointer">
-            <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value.toLocaleLowerCase()) } />
+        <div className="relative flex items-center w-[300px] shadow-md rounded-lg">
+          <ScanSearch className="absolute left-[265px] h-8 w-8 text-gray-500"  color="#ea580c"/>
+          <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value.toLocaleLowerCase()) } />
         </div>
         {
           open && (
