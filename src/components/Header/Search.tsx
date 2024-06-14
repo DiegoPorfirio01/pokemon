@@ -5,33 +5,12 @@ import { useDispatch, useSelector  } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { ScanSearch } from "lucide-react";
 
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command"
-
-import { setFilterType } from "@/reducers/typesSlice";
 import { Input } from "../ui/input";
 
-const Search = () => {
-  const [open, setOpen] = useState(false)
- 
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "/" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setOpen((open) => !open)
-      }
-    }
- 
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [])
+import { setFilterType } from "@/reducers/typesSlice";
 
+const Search = () => {
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -40,9 +19,11 @@ const Search = () => {
 
   const [searchValue, setSearchValue ] = useState('');
   const [filter, setFilter] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const resetValues = () => {
     setSearchValue('')
+    setOpen(false)
     setFilter([])
   }
 
@@ -89,6 +70,7 @@ const Search = () => {
       return;
     }
 
+    setOpen(true);
     setSearchValue(value)
 
     const filteredPokemons = filterPokemons.filter((pokemon) => pokemon.name.startsWith(value));
@@ -100,25 +82,22 @@ const Search = () => {
   const onSearch = (item) => {
     item.url.includes('pokemon') ?
       navigate(`/pokemons/${item.name}`) : navigate(`/pokemons/type/${item.name}`) 
-    
-    setOpen(false)
   }
 
   return  (
     <>
-      <div className="flex items-center cursor-pointer" onClick={() => setOpen(true)}>
-        <ScanSearch className="mr-2 h-12 w-12"  color="#ea580c"/>
-      </div>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value) } />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading={searchValue.length > 0 ? 'Sugestions' : ''}>
-            { 
-              filter.map((item) => 
-                <CommandItem key={item.name}>
-                  <div className="flex justify-between w-full" onClick={() => onSearch(item)}>
-                    <span>{item.name.replaceAll('-', ' ')}</span>
+      <div>
+        <div className="flex items-center cursor-pointer">
+          <ScanSearch className="mr-2 h-12 w-12"  color="#ea580c"/>
+          <Input placeholder="name or type" value={searchValue} onChange={(e) => handleSearchInput(e.target.value) } />
+        </div>
+        {
+          open && (
+            <div className="z-10 max-h-72 overflow-auto absolute m-2 w-[285px] flex flex-col items-center gap-1 bg-neutral-50 p-2 rounded-md font-mono shadow-md">
+              {
+                filter.map((item) => 
+                  <div key={item.name} className="flex justify-between w-full items-center cursor-pointer hover:bg-slate-100 p-2 rounded-md" onClick={() => onSearch(item)}>
+                    <span className="capitalize">{item.name.replaceAll('-', ' ')}</span>
                     <span className={item.url.includes('pokemon') ? 
                       'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-primary' : 
                       'font-medium letter-spacing: -0.05em p-1 rounded-sm text-white  bg-slate-500' }
@@ -126,13 +105,13 @@ const Search = () => {
                       {item.url.includes('pokemon') ? 'Pokemon' : 'Type'}
                     </span>
                   </div>
-                </CommandItem>
-              )
-            }
-          </CommandGroup>
-          <CommandSeparator />
-        </CommandList>
-      </CommandDialog>
+                )
+              }
+            </div>
+          )
+        }
+       
+      </div>  
     </>
   )
 }
