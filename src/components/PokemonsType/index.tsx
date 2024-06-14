@@ -7,6 +7,7 @@ import { SkeletonCard } from "../Pokemons/SkeletonCard"
 import PokemonCard from "../Pokemons/PokemonCard"
 import { ArrowLeft } from "lucide-react"
 import InfinityScroll from "../InfinityScroll"
+import NotFoundPokemonsType from "./NotFoundPokemonsType"
 
 const PokemonsType = () => {
   const [ isLoading, setIsLoading ] = useState(true) 
@@ -40,7 +41,7 @@ const PokemonsType = () => {
         <ArrowLeft width={50} height={30} className="rounded-primary text-[#FFCB05] bg-[#2d71b8] cursor-pointer" />
       </Link>
       <div className="my-16 flex items-center justify-center">
-        <h1 className={`font-extrabold text-5xl rounded-3xl p-4 text-white bg-${type}`}>{type}</h1>
+        <h1 className={`font-extrabold text-5xl rounded-3xl p-4 ${type === 'shadow' ? "text-black" : "text-white" } bg-${type}`}>{type}</h1>
       </div>
       <div className="flex flex-col items-center">     
         <div className="grid sm:grid-cols-4 w-full gap-7 mx-4">
@@ -52,7 +53,10 @@ const PokemonsType = () => {
           } 
         </div>
         { 
-          !isLoading && ( <InfinityScroll text={'Load more...'} action={() => dispatch(setPagination())} /> )
+          !isLoading && typePokemons.length > 0 && ( <InfinityScroll text={'Load more...'} action={() => dispatch(setPagination())} /> )
+        }
+        { 
+          !isLoading && typePokemons.length === 0 && ( <NotFoundPokemonsType /> )
         }
       </div>
     </>
